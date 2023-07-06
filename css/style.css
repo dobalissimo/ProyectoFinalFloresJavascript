@@ -118,3 +118,7 @@ body {
   align-items: center;
   flex-wrap: wrap;
 }
+
+.modal-message {
+  color: #007bff;
+}

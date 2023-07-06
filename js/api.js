@@ -1,78 +1,84 @@
 document.addEventListener('DOMContentLoaded', function() {
     const catchProbability = 0.3; // Fixed catch probability
-  
+
     const team = []; // Array to store the caught Pokémon
     const teamLimit = 6; // Maximum number of Pokémon in the team
-  
+
     const pokemonIdInput = document.getElementById('pokemonId');
     const messageText = document.querySelector('.message');
     const teamList = document.getElementById('teamList');
     const confirmationModal = document.getElementById('confirmationModal');
     const confirmCatchButton = document.getElementById('confirmCatchButton');
     const cancelCatchButton = document.getElementById('cancelCatchButton');
-  
-    let tries = 20; // Maximum number of tries (Pokeballs)
-  
-    catchButton.addEventListener('click', function() {
-      const pokemonId = parseInt(pokemonIdInput.value);
-  
-      if (isNaN(pokemonId)) {
-        showMessage('Invalid Pokémon ID. Please enter a numeric value.');
-        return;
-      }
-  
-      getPokemonData(pokemonId)
-  .then(pokemonData => {
-    tryToCatchPokemon(pokemonData.name, pokemonData.types, pokemonData.sprite);
-  })
-  .catch(error => {
-    console.error('Error:', error);
-  });
 
-    });
-  
-    confirmCatchButton.addEventListener('click', function() {
-      confirmationModal.style.display = 'none';
-      const pokemonId = parseInt(pokemonIdInput.value);
-      getPokemonName(pokemonId)
-        .then(pokemonName => {
-          tryToCatchPokemon(pokemonName);
-        })
-        .catch(error => {
-          console.error('Error:', error);
-        });
-    });
-  
-    cancelCatchButton.addEventListener('click', function() {
-      confirmationModal.style.display = 'none';
-      showMessage('You decided not to catch the Pokémon.');
-    });
-  
-    function tryToCatchPokemon(pokemonName, types, sprite) {
-        let caught = false;
-      
-        while (tries > 0 && !caught) {
-          const isSuccess = Math.random() <= catchProbability;
-      
-          if (isSuccess && team.length < teamLimit) {
-            team.push({ name: pokemonName, types: types, sprite: sprite });
-            showMessage(`Congratulations! You caught ${pokemonName} and added it to your team.`);
-            caught = true;
-          } else if (!isSuccess) {
-            showMessage(`Oh no! ${pokemonName} broke free.`);
-          } else {
-            showMessage(`Your team is already full. You cannot catch more Pokémon.`);
-          }
-      
-          tries--;
+    const pokeballsLeftText = document.querySelector('.pokeballs-left');
+    let tries = 20; // Maximum number of tries (Pokeballs)
+
+
+    const catchButton = document.getElementById('catchButton');
+    catchButton.addEventListener('click', function() {
+        const pokemonId = parseInt(pokemonIdInput.value);
+
+        if (isNaN(pokemonId)) {
+            showMessage('Invalid Pokémon ID. Please enter a numeric value.');
+            return;
         }
+
+        getPokemonData(pokemonId)
+            .then(pokemonData => {
+                showConfirmationModal(pokemonData.name);
+            })
+            .catch(error => {
+                console.error('Error:', error);
+            });
+    });
+
+    confirmCatchButton.addEventListener('click', function() {
+        confirmationModal.style.display = 'none';
+        const pokemonId = parseInt(pokemonIdInput.value);
+        getPokemonData(pokemonId)
+            .then(pokemonData => {
+                tryToCatchPokemon(pokemonData.name, pokemonData.types, pokemonData.sprite);
+            })
+            .catch(error => {
+                console.error('Error:', error);
+            });
+    });
+
+    cancelCatchButton.addEventListener('click', function() {
+        confirmationModal.style.display = 'none';
+        showMessage('You decided not to catch the Pokémon.');
+    });
+
+    function showConfirmationModal(pokemonName) {
+        const modalMessage = document.querySelector('.modal-message');
+        modalMessage.textContent = `Are you sure you want to catch ${pokemonName}?`;
+        confirmationModal.style.display = 'block';
+    }
+
+    function tryToCatchPokemon(pokemonName, types, sprite) {
+      const isSuccess = Math.random() <= catchProbability;
   
-      if (tries === 0 && !caught) {
-        showMessage('You ran out of Pokeballs. The Pokémon got away.');
+      if (isSuccess && team.length < teamLimit) {
+          team.push({ name: pokemonName, types: types, sprite: sprite });
+          showMessage(`Congratulations! You caught ${pokemonName} and added it to your team.`);
+      } else if (isSuccess && team.length >= teamLimit) {
+          showMessage(`Your team is already full. You cannot catch more Pokémon.`);
+      } else {
+          showMessage(`Oh no! ${pokemonName} broke free.`);
       }
   
-      displayTeamMembers();
-    }
+      tries--;
+      updatePokeballsLeftText();
+  
+      if (tries === 0 || isSuccess) {
+          displayTeamMembers();
+      }
+  }
+  
+  function updatePokeballsLeftText() {
+      pokeballsLeftText.textContent = `Pokéballs Left: ${tries}`;
+  }
   
     function getPokemonData(pokemonNumber) {
         return fetch(`https://pokeapi.co/api/v2/pokemon/${pokemonNumber}`)
