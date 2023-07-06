@@ -121,4 +121,43 @@ body {
 
 .modal-message {
   color: #007bff;
+  font-weight: bold;
+  margin-bottom: 10px;
 }
+
+.modal {
+  display: none;
+  position: fixed;
+  z-index: 1;
+  left: 0;
+  top: 0;
+  width: 100%;
+  height: 100%;
+  overflow: auto;
+  background-color: rgba(0, 0, 0, 0.5);
+}
+
+.modal-content {
+  background-color: #fefefe;
+  margin: auto;
+  padding: 20px;
+  border: 1px solid #888;
+  max-width: 80%;
+  text-align: center;
+}
+
+.modal-buttons {
+  text-align: center;
+}
+
+.modal-buttons button {
+  margin: 10px;
+}
+
+.pokeball-image {
+  width: 100px; /* Adjust the width as per your requirements */
+  height: auto;
+  display: block;
+  margin: 0 auto;
+}
+
