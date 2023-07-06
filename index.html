@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-9ndCyUaIbzAi2FUVXJi0CjmCapSmO7SnpJef0486qhLnuZ2cdeRhO02iuK6FUUVM" crossorigin="anonymous">
+    <link rel="stylesheet" href="css/style.css">
+
+    <title>Pokémon Catcher</title>
+</head>
+<body>
+    <div class="container">
+        <h2>Pokémon Catcher</h2>
+        <div class="form-group">
+            <label for="pokemonId">Pokémon ID:</label>
+            <input type="text" id="pokemonId" placeholder="Enter the Pokémon ID">
+        </div>
+        <div class="form-group">
+            <button id="catchButton" class="btn">Throw a Pokeball</button>
+        </div>
+        <p class="message"></p>
+        <div class="team-members">
+            <h3>Team Members:</h3>
+            <div class="row" id="teamList"></div>
+        </div>
+    </div>
+
+    <div id="confirmationModal" class="modal">
+        <div class="modal-content">
+            <p class="modal-message"></p>
+            <div class="modal-buttons">
+                <button id="confirmCatchButton" class="btn">Yes</button>
+                <button id="cancelCatchButton" class="btn">No</button>
+            </div>
+        </div>
+    </div>
+
+    <script src="js/api.js"></script>
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            // Your JavaScript code here
+        });
+    </script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js" integrity="sha384-geWF76RCwLtnZ8qwWowPQNguL3RmwHVBC9FhGdlKrxdiJJigb/j/68SIy3Te4Bkz" crossorigin="anonymous"></script>
+</body>
+</html>
