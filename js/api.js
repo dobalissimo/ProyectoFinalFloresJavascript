@@ -191,7 +191,7 @@ document.addEventListener('DOMContentLoaded', function() {
   }
 
   function updatePokeballsLeftText() {
-    pokeballsLeftText.textContent = `Pokébalas restantes: ${pokeballsLeft}, Great Balls restantes: ${greatBallsLeft}, Ultra Balls restantes: ${ultraBallsLeft}, Master Balls restantes: ${masterBallsLeft}`;
+    pokeballsLeftText.textContent = `Pokébolas restantes: ${pokeballsLeft}, Great Balls restantes: ${greatBallsLeft}, Ultra Balls restantes: ${ultraBallsLeft}, Master Balls restantes: ${masterBallsLeft}`;
   }
 
   function getPokemonData(pokemonNumber) {
