@@ -3,21 +3,21 @@ document.addEventListener('DOMContentLoaded', function() {
     pokeball: 0.3,
     greatBall: 0.5,
     ultraBall: 0.7,
-    masterBall: 1.0, // Master Ball always succeeds
+    masterBall: 1.0, 
   };
 
-  const team = JSON.parse(localStorage.getItem('team')) || []; // Obtener el equipo del localStorage
-  const teamLimit = 6; // Número máximo de Pokémon en el equipo
+  const team = JSON.parse(localStorage.getItem('team')) || []; 
+  const teamLimit = 6; 
 
   const pokemonIdInput = document.getElementById('pokemonId');
   const messageText = document.querySelector('.message');
   const teamList = document.getElementById('teamList');
   const pokeballsLeftText = document.querySelector('.pokeballs-left');
 
-  let pokeballsLeft = parseInt(localStorage.getItem('pokeballsLeft')) || 10; // Number of Pokéballs
-  let greatBallsLeft = parseInt(localStorage.getItem('greatBallsLeft')) || 5; // Number of Great Balls
-  let ultraBallsLeft = parseInt(localStorage.getItem('ultraBallsLeft')) || 2; // Number of Ultra Balls
-  let masterBallsLeft = parseInt(localStorage.getItem('masterBallsLeft')) || 1; // Number of Master Balls
+  let pokeballsLeft = parseInt(localStorage.getItem('pokeballsLeft')) || 10; 
+  let greatBallsLeft = parseInt(localStorage.getItem('greatBallsLeft')) || 5; 
+  let ultraBallsLeft = parseInt(localStorage.getItem('ultraBallsLeft')) || 2; 
+  let masterBallsLeft = parseInt(localStorage.getItem('masterBallsLeft')) || 1; 
 
   const catchButton = document.getElementById('catchButton');
   catchButton.addEventListener('click', function() {
@@ -43,7 +43,7 @@ document.addEventListener('DOMContentLoaded', function() {
     const pokemonId = parseInt(pokemonIdInput.value);
 
     if (isNaN(pokemonId)) {
-      showMessage('Invalid Pokémon ID. Please enter a numeric value.');
+      showMessage('Debés ingresar un valor numérico menor a 1008 (por el momento).');
       return;
     }
 
@@ -76,17 +76,17 @@ document.addEventListener('DOMContentLoaded', function() {
           console.error('Error:', error);
         });
     } else {
-      showMessage(`You ran out of ${ballType === 'pokeball' ? 'Pokéballs' : ballType}! Visit the nearest mart to get more.`);
+      showMessage(`Te quedaste sin ${ballType === 'pokeball' ? 'Pokéballs' : ballType}! Visita la tienda más cercana para comprar más.`);
     }
   }
 
   function showConfirmationModal(pokemonName, ballType) {
     Swal.fire({
-      title: 'Confirmation',
-      text: `Are you sure you want to catch ${pokemonName} with a ${ballType}?`,
+      title: 'Confirmación:',
+      text: `Seguro que querés atrapar a ${capitalizeFirstLetter(pokemonName)} con una ${ballType}?`,
       icon: 'question',
       showCancelButton: true,
-      confirmButtonText: 'Yes',
+      confirmButtonText: 'Sí',
       cancelButtonText: 'No',
       reverseButtons: true,
       focusCancel: true
@@ -101,7 +101,7 @@ document.addEventListener('DOMContentLoaded', function() {
             console.error('Error:', error);
           });
       } else {
-        showMessage('You decided not to catch the Pokémon.');
+        showMessage('Decidiste no atrapar al pokemon.');
       }
     });
   }
@@ -112,18 +112,18 @@ document.addEventListener('DOMContentLoaded', function() {
   });
 
   function resetTeamAndPokeballs() {
-    team.length = 0; // Vaciar el equipo
-    pokeballsLeft = 10; // Restablecer el número de Pokéballs
-    greatBallsLeft = 5; // Restablecer el número de Great Balls
-    ultraBallsLeft = 2; // Restablecer el número de Ultra Balls
-    masterBallsLeft = 1; // Restablecer el número de Master Balls
+    team.length = 0; 
+    pokeballsLeft = 10; 
+    greatBallsLeft = 5; 
+    ultraBallsLeft = 2; 
+    masterBallsLeft = 1; 
 
-    saveTeamAndPokeballs(); // Guardar los cambios en el localStorage
+    saveTeamAndPokeballs(); 
 
-    showMessage('The team and tries have been reset.'); // Mostrar un mensaje de confirmación
+    showMessage('Se reseteó el equipo y tus intentos restantes.'); 
 
-    displayTeamMembers(); // Actualizar la visualización del equipo
-    updatePokeballsLeftText(); // Actualizar el texto de las Pokébolas restantes
+    displayTeamMembers(); 
+    updatePokeballsLeftText(); 
   }
 
   function tryToCatchPokemon(pokemonName, types, sprite, ballType) {
@@ -151,15 +151,14 @@ document.addEventListener('DOMContentLoaded', function() {
       const isSuccess = Math.random() <= catchProbability[ballType];
 
       if (isSuccess && team.length < teamLimit) {
-        team.push({ name: pokemonName, types: types, sprite: sprite });
-        showMessage(`Congratulations! You caught ${pokemonName} and added it to your team with a ${ballType}.`);
+        team.push({ name: capitalizeFirstLetter(pokemonName), types: types, sprite: sprite });
+        showMessage(`Fekucutacuibes! Atrapaste a ${capitalizeFirstLetter(pokemonName)} y lo agregaste a tu equipo con una ${ballType}.`);
       } else if (isSuccess && team.length >= teamLimit) {
-        showMessage(`Your team is already full. You cannot catch more Pokémon with a ${ballType}.`);
+        showMessage(`Tu equipo está lleno..`);
       } else {
-        showMessage(`Oh no! ${pokemonName} broke free from the ${ballType}.`);
+        showMessage(`Oh no! ${capitalizeFirstLetter(pokemonName)} se escapó de tu ${ballType}.`);
       }
 
-      // Deduct the ball used
       switch (ballType) {
         case 'pokeball':
           pokeballsLeft = remainingBalls - 1;
@@ -180,19 +179,19 @@ document.addEventListener('DOMContentLoaded', function() {
       updatePokeballsLeftText();
 
       if (pokeballsLeft === 0 && greatBallsLeft === 0 && ultraBallsLeft === 0 && masterBallsLeft === 0) {
-        showMessage('You ran out of all types of balls. Visit the nearest mart to get more.');
+        showMessage('Te quedaste sin ningún tipo de pokebolas, debes comprar más.');
       }
 
-      saveTeamAndPokeballs(); // Guardar el equipo y las Pokébolas restantes en el localStorage
+      saveTeamAndPokeballs(); 
 
       displayTeamMembers();
     } else {
-      showMessage(`You ran out of ${ballType === 'pokeball' ? 'Pokéballs' : ballType}. Visit the nearest mart to get more.`);
+      showMessage(`Te quedaste sin ${ballType === 'pokeball' ? 'Pokéballs' : ballType}. Comprá más en tu tienda más cercana.`);
     }
   }
 
   function updatePokeballsLeftText() {
-    pokeballsLeftText.textContent = `Pokéballs left: ${pokeballsLeft}, Great Balls left: ${greatBallsLeft}, Ultra Balls left: ${ultraBallsLeft}, Master Balls left: ${masterBallsLeft}`;
+    pokeballsLeftText.textContent = `Pokébalas restantes: ${pokeballsLeft}, Great Balls restantes: ${greatBallsLeft}, Ultra Balls restantes: ${ultraBallsLeft}, Master Balls restantes: ${masterBallsLeft}`;
   }
 
   function getPokemonData(pokemonNumber) {
@@ -215,10 +214,10 @@ document.addEventListener('DOMContentLoaded', function() {
   }
 
   function displayTeamMembers() {
-    teamList.innerHTML = ''; // Limpiar la lista de equipo
+    teamList.innerHTML = ''; 
 
     if (team.length === 0) {
-      return; // Salir si el equipo está vacío
+      return; 
     }
 
     const row = document.createElement('div');
@@ -246,7 +245,7 @@ document.addEventListener('DOMContentLoaded', function() {
 
       const pokemonName = document.createElement('h5');
       pokemonName.classList.add('card-title');
-      pokemonName.textContent = pokemon.name;
+      pokemonName.textContent = capitalizeFirstLetter(pokemon.name);
       cardBody.appendChild(pokemonName);
 
       const pokemonTypes = document.createElement('p');
@@ -263,11 +262,15 @@ document.addEventListener('DOMContentLoaded', function() {
   }
 
   function saveTeamAndPokeballs() {
-    localStorage.setItem('team', JSON.stringify(team)); // Guardar el equipo en el localStorage
-    localStorage.setItem('pokeballsLeft', pokeballsLeft.toString()); // Guardar las Pokébolas restantes en el localStorage
-    localStorage.setItem('greatBallsLeft', greatBallsLeft.toString()); // Guardar las Great Balls restantes en el localStorage
-    localStorage.setItem('ultraBallsLeft', ultraBallsLeft.toString()); // Guardar las Ultra Balls restantes en el localStorage
-    localStorage.setItem('masterBallsLeft', masterBallsLeft.toString()); // Guardar las Master Balls restantes en el localStorage
+    localStorage.setItem('team', JSON.stringify(team)); 
+    localStorage.setItem('pokeballsLeft', pokeballsLeft.toString()); 
+    localStorage.setItem('greatBallsLeft', greatBallsLeft.toString()); 
+    localStorage.setItem('ultraBallsLeft', ultraBallsLeft.toString()); 
+    localStorage.setItem('masterBallsLeft', masterBallsLeft.toString()); 
+  }
+
+  function capitalizeFirstLetter(string) {
+    return string.charAt(0).toUpperCase() + string.slice(1);
   }
 
   updatePokeballsLeftText();
