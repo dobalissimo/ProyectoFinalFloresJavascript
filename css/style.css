@@ -1,0 +1,171 @@
+body {
+    font-family: arial;
+    background-color: teal;
+    color: white;
+    text-align: center;
+}
+
+.btn img {
+    display: inline-block;
+    width: 1em;
+    height: 1em;
+    vertical-align: middle;
+    margin-right: 0.2em;
+}
+
+.form-group {
+    margin-bottom: 10px;
+}
+
+.btn {
+    padding: 10px 20px;
+    background-color: #007bff;
+    color: #fff;
+    border: none;
+    cursor: pointer;
+}
+
+.message {
+    margin-top: 10px;
+    font-weight: bold;
+}
+
+.team-members {
+    margin-top: 20px;
+    font-weight: bold;
+}
+
+.card {
+    width: 100%;
+    height: auto;
+}
+
+.card-water {
+    background: linear-gradient(to right, #4A90E2 50%, gray 50%);
+}
+
+.card-normal {
+    background: linear-gradient(to right, #A8A878 50%, gray 50%);
+}
+
+.card-fighting {
+    background: linear-gradient(to right, #C03028 50%, gray 50%);
+}
+
+.card-flying {
+    background: linear-gradient(to right, #A890F0 50%, gray 50%);
+}
+
+.card-poison {
+    background: linear-gradient(to right, #A040A0 50%, gray 50%);
+}
+
+.card-ground {
+    background: linear-gradient(to right, #E0C068 50%, gray 50%);
+}
+
+.card-rock {
+    background: linear-gradient(to right, #B8A038 50%, gray 50%);
+}
+
+.card-water,
+.card-normal,
+.card-fighting,
+.card-flying,
+.card-poison,
+.card-ground,
+.card-rock {
+    background: linear-gradient(to right, #4A90E2 50%, gray 50%);
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+}
+
+.card-img-top {
+  max-height: 200px;
+  width: auto;
+  margin: 0 auto;
+}
+
+.card-body {
+  padding: 10px;
+}
+
+.card-title {
+  font-size: 18px;
+  font-weight: bold;
+  white-space: normal;
+  overflow: hidden;
+  text-overflow:clip;
+}
+
+.card-text {
+  font-size: 14px;
+  white-space: normal;
+  overflow: hidden;
+  text-overflow:clip;
+}
+
+.card-grid {
+  margin-top: 20px;
+}
+
+#teamList {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-wrap: wrap;
+}
+
+.modal-message {
+  color: #007bff;
+  font-weight: bold;
+  margin-bottom: 10px;
+}
+
+.modal {
+  display: none;
+  position: fixed;
+  z-index: 1;
+  left: 0;
+  top: 0;
+  width: 100%;
+  height: 100%;
+  overflow: auto;
+  background-color: rgba(0, 0, 0, 0.5);
+}
+
+.modal-content {
+  background-color: #fefefe;
+  margin: auto;
+  padding: 20px;
+  border: 1px solid #888;
+  max-width: 80%;
+  text-align: center;
+}
+
+.modal-buttons {
+  text-align: center;
+}
+
+.modal-buttons button {
+  margin: 10px;
+}
+
+.pokeball-image {
+  width: 100px; /* Adjust the width as per your requirements */
+  height: auto;
+  display: block;
+  margin: 0 auto;
+}
+
+/* Custom styles for small devices (e.g., smartphones) */
+@media screen and (max-width: 576px) {
+  .btn {
+    font-size: 14px; /* Reduce the font size */
+    padding: 5px 10px; /* Adjust the padding */
+  }
+}
+

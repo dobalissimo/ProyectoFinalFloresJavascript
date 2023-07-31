@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-9ndCyUaIbzAi2FUVXJi0CjmCapSmO7SnpJef0486qhLnuZ2cdeRhO02iuK6FUUVM" crossorigin="anonymous">
+    <link rel="stylesheet" href="css/style.css">
+
+    <title>Pokémon Catcher</title>
+</head>
+<body>
+    <div class="container">
+        <h2>Pokémon Catcher</h2>
+        <div class="form-group">
+            <label for="pokemonId">Pokémon ID:</label>
+            <input type="text" id="pokemonId" placeholder="Ingresá el ID de tu Pokémon">
+        </div>
+        <div class="form-group">
+            <button id="catchButton" class="btn">Lanzá tu pokeball</button>
+            <button id="greatBallButton" class="btn">Lanzá tu greatball</button>
+            <button id="ultraBallButton" class="btn">Lanzá tu ultraball</button>
+            <button id="masterBallButton" class="btn">Lanzá tu masterball</button>
+            <button id="resetButton" class="btn">Resetear Equipo</button>
+        </div>
+        <p class="message"></p>
+        <div class="team-members">
+            <h3>Miembros de tu equipo:</h3>
+            <div class="row row-cols-1 row-cols-md-3 g-4 card-grid" id="teamList"></div>
+        </div>
+        <p class="message"></p>
+        <p class="pokeballs-left">Pokebolas Restantes: 20</p>
+    </div>
+
+
+    <div id="confirmationModal" class="modal">
+        <div class="modal-content">
+            <p class="modal-message"></p>
+            <div class="modal-buttons">
+                <button id="confirmCatchButton" class="btn">Si</button>
+                <button id="cancelCatchButton" class="btn">No</button>
+            </div>
+        </div>
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js" integrity="sha384-geWF76RCwLtnZ8qwWowPQNguL3RmwHVBC9FhGdlKrxdiJJigb/j/68SIy3Te4Bkz" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11.0.17/dist/sweetalert2.all.min.js"></script>
+    <script src="js/api.js"></script>
+</body>
+</html>
